@@ -24,24 +24,24 @@ public class RayyanLoginPage extends BasePage {
     //Method to Enter Login Email
     public void enterSigninEmail(String username) {
         sendKeys(locators.userEmailField, username);
-        System.out.println("Login Email: " + username + " is entered");
+        System.out.println("[INFO] Login Email: " + username + " is entered");
     }
 
     //Method to Enter Password in the Field
     public void enterPassword(String password) {
         sendKeys(locators.userPasswordField, password);
-        System.out.println("Password: " + password + " is entered");
+        System.out.println("[INFO] Password: " + password + " is entered");
     }
 
     //Method to Click on Login Button
     public void clickLogin() {
         click(locators.submitSigninButton);
-        System.out.println("Log in Button is clicked");
+        System.out.println("[INFO] Log in Button is clicked");
     }
 
     //Method to do Login Using Email/Password Fields
     public void login(String email, String password) {
-        System.out.println("Log in method is called");
+        System.out.println("[INFO] Log in method is called");
         enterSigninEmail(email);
         enterPassword(password);
         clickLogin();

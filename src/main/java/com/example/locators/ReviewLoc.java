@@ -64,11 +64,11 @@ public class ReviewLoc {
     public WebElement inviteEmailInput;
 
     //User Role Button
-    @FindBy(xpath = "//button[.//div[normalize-space()='Select member role']]")
+    @FindBy(xpath = "//button[@id='radix-:r1:']")
     public WebElement memberRoleDropdownButton;
 
     //User Role List
-    @FindBy(css = "button[data-testid='dropdown-option']")
+    @FindBy(css = "div[role='menuitem']")
     public List<WebElement> memberRoleOptions;
 
     //Invite Reason/Message Text Area

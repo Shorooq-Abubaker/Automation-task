@@ -12,7 +12,7 @@ public class CreateReviewTest extends BaseTest {
     @DataProvider(name = "reviewData")
     public Object[][] reviewData() {
         return new Object[][] {
-                { "Systematic Review", "Biomedical", "Auto description 1", "user1@example.com", "Collaborator" },
+                { "Systematic Review", "Biomedical", "Auto description 1", "user1@example.com", "Viewer" },
                 { "Literature Review", "Environmental", "Auto description 2", "user2@example.com", "Reviewer" },
                 { "Systematic Review", "Biomedical", "Auto description 3", "user3@example.com", "Viewer" }
         };

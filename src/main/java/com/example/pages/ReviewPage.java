@@ -1,13 +1,12 @@
 package com.example.pages;
 
 import com.example.locators.ReviewLoc;
-import com.example.utilities.WaitUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class ReviewPage extends BasePage {
@@ -32,7 +31,7 @@ public class ReviewPage extends BasePage {
             waitUtils.waitForVisibility(locators.createReviewButton);
             return locators.createReviewButton.isDisplayed();
         } catch (Exception e) {
-            System.err.println("Create Review button not found or not visible: " + e.getMessage());
+            System.err.println("[Error] Create Review button not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -84,7 +83,7 @@ public class ReviewPage extends BasePage {
     }
 
     //Method to Select Review Domain from the List
-    private void selectReviewDomain(String reviewDomainName) throws NoSuchFieldException {
+    private void selectReviewDomain(String reviewDomainName) throws NoSuchFieldException, InterruptedException {
 
         //Click on Review Domain Button
         clickReviewDomainDropdownButton();
@@ -93,6 +92,7 @@ public class ReviewPage extends BasePage {
         waitUtils.waitForVisibilityOfAll(locators.DomainOptions);
 
         //Search for the selected Domain
+        Thread.sleep(300);
         for (WebElement option : locators.DomainOptions) {
             if (option.getText().trim().equalsIgnoreCase(reviewDomainName)) {
                 option.click();
@@ -124,7 +124,7 @@ public class ReviewPage extends BasePage {
     }
 
     //Method to Fill and Create the Form Create Review
-    public void createReview(String title, String reviewTypeName, String reviewDomainName, String reviewDescription) throws NoSuchFieldException {
+    public void createReview(String title, String reviewTypeName, String reviewDomainName, String reviewDescription) throws NoSuchFieldException, InterruptedException {
 
         //Click create review button in dashboard page
         clickCreateReview();
@@ -168,10 +168,10 @@ public class ReviewPage extends BasePage {
 
     //Method to Avoid the "Upload Articles" and "Upgrade Dialog"
     public UploadStatus uploadArticles() {
-        if (waitUtils.isElementVisible(locators.skipButtonBy, 5)) {
-            driver.findElement(locators.skipButtonBy).click();
+        if (isElementVisible(locators.skipButtonBy, 5)) {
+            click(locators.skipButton);
             return UploadStatus.SKIP_CLICKED;
-        } else if (waitUtils.isElementVisible(locators.UpgradeDialog, 5)) {
+        } else if (isElementVisible(locators.UpgradeDialog, 5)) {
             return UploadStatus.UPGRADE_DIALOG_VISIBLE;
         } else {
             return UploadStatus.NOTHING_VISIBLE;
@@ -260,7 +260,7 @@ public class ReviewPage extends BasePage {
     // Check for upgrade dialog
     public boolean isWizardPresent(){
         try {
-            return waitUtils.isElementFullyVisible(locators.UpgradeDialog);
+            return isElementFullyVisible(locators.UpgradeDialog);
         }catch (Exception e){
             return false;
         }
@@ -283,10 +283,10 @@ public class ReviewPage extends BasePage {
     }
 
     //Method to Delete Review
-    public void deleteReview() {
+    public void deleteReview() throws InterruptedException {
         // Click on More options
-        waitUtils.waitForClickability(locators.threeDotsButton);
         waitUtils.waitForVisibility(locators.threeDotsButton);
+        Thread.sleep(300);
         clickThreeDotsButton();
 
         // Wait until the dropdown appears
@@ -299,5 +299,6 @@ public class ReviewPage extends BasePage {
         waitUtils.waitForVisibility(locators.confirmDeleteButton);
         clickConfirmDeleteButton();
     }
+
 
 }

@@ -90,6 +90,7 @@ https://chromedriver.chromium.org/downloads
    - Navigate to config.properties and set your Rayyan (Email, Password) --Should be signed up
    - Navigate to "CreateReviewTest" class 
    - Right-click and select "Run", or open "CreateReview" then click on green triangle at the right top
+   - OR Navigate to resources/testng.xml, Then click Run
 
 ### Notes
    - If the Upgrade dialog appears, the test will fail to reflect incorrect behavior.

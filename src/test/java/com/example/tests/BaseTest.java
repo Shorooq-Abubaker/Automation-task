@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-import java.lang.reflect.Method;
-
-
 public class BaseTest {
     protected WebDriver driver;
     protected WaitUtils wait;
@@ -52,13 +49,11 @@ public class BaseTest {
     private void initializeDriver() {
         String browser = System.getProperty("browser", "chrome").toLowerCase(); // Default to Chrome
 
-        switch (browser) {
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", Config.CHROME_DRIVER_PATH);
-                driver = new ChromeDriver();
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        if (browser.equals("chrome")) {
+            System.setProperty("webdriver.chrome.driver", Config.CHROME_DRIVER_PATH);
+            driver = new ChromeDriver();
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
     }
 
